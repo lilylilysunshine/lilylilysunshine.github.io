@@ -1,0 +1,103 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Lu Xian</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow reading column; a crease-pattern mark in the header; projects as a ruled list, not cards. */
+:root{
+  --paper:#f7f8f6; --ink:#1b211f; --muted:#5d6763; --rule:#d9dedb;
+  --mountain:#c2452d; --valley:#2c5f8a; --chip:#eceeec;
+  --display:"Fraunces",Georgia,serif; --body:"Public Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#141817;--ink:#e8ecea;--muted:#9aa5a0;--rule:#2b3230;--mountain:#e2735c;--valley:#7fb0d9;--chip:#1f2523;color-scheme:dark}}
+:root[data-theme="dark"]{--paper:#141817;--ink:#e8ecea;--muted:#9aa5a0;--rule:#2b3230;--mountain:#e2735c;--valley:#7fb0d9;--chip:#1f2523;color-scheme:dark}
+body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--body)}
+.wrap{max-width:720px;margin:0 auto;padding-block:56px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:56px}
+header{display:grid;grid-template-columns:96px 1fr;gap:24px;align-items:center}
+header svg{width:96px;height:96px}
+h1{font:600 2.6rem/1.1 var(--display);margin:0;text-wrap:balance}
+.lede{margin:8px 0 0;color:var(--muted);max-width:56ch}
+h2{font:500 .75rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.proj{display:grid;gap:0}
+.proj article{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.yr{font:400 .8rem/1.6 var(--mono);color:var(--muted);padding-top:4px}
+h3{font:600 1.3rem/1.3 var(--display);margin:0 0 6px}
+.proj p{margin:0 0 10px;max-width:60ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font:400 .75rem/1 var(--mono);background:var(--chip);padding:5px 8px;border-radius:3px;color:var(--muted)}
+.interests{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 32px}
+.interests div{border-left:2px dashed var(--valley);padding-left:14px}
+.interests b{display:block;font-weight:600}
+.interests span{color:var(--muted);font-size:.93rem}
+.contact p{margin:0;color:var(--muted)}
+.contact code{font-family:var(--mono);color:var(--ink);user-select:all}
+.legend{font:400 .75rem var(--mono);color:var(--muted);display:flex;gap:16px}
+.legend i{display:inline-block;width:18px;height:0;border-top:2px solid var(--mountain);vertical-align:middle;margin-right:6px}
+.legend i.v{border-top:2px dashed var(--valley)}
+@media (max-width:560px){header{grid-template-columns:1fr}.proj article{grid-template-columns:1fr;gap:4px}.interests{grid-template-columns:1fr}h1{font-size:2.1rem}}
+</style>
+
+</head><body>
+<div class="wrap">
+  <header>
+    <svg viewBox="0 0 100 100" aria-label="Waterbomb base crease pattern">
+      <rect x="2" y="2" width="96" height="96" fill="none" stroke="var(--ink)" stroke-width="2"/>
+      <path d="M2 2L98 98M98 2L2 98" stroke="var(--mountain)" stroke-width="2" fill="none"/>
+      <path d="M50 2V98M2 50H98" stroke="var(--valley)" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+    </svg>
+    <div>
+      <h1>Lu Xian</h1>
+      <p class="lede">AI researcher. I work on getting machines to reason about physical space: how things move, bend, and fold, and how to turn that reasoning into actions in the real world.</p>
+    </div>
+  </header>
+
+  <section>
+    <h2>Projects</h2>
+    <div class="proj">
+      <article>
+        <div class="yr">2026 · in progress</div>
+        <div>
+          <h3>Foldable origami: CP2Seq</h3>
+          <p>A paper-folding simulator and benchmark that tests whether multimodal models can plan in physical space. Given a crease pattern and a target folded shape, the model must produce the fold sequence. The simulator runs each fold and rejects illegal moves. Across 600 generated tasks, no tested model setup solved a task that needs 11 or more folds.</p>
+          <div class="tags"><span>Spatial reasoning</span><span>Benchmarks</span><span>Simulation</span><span>Paper under review</span></div>
+        </div>
+      </article>
+      <article>
+        <div class="yr">Earlier</div>
+        <div>
+          <h3>Microrobots</h3>
+          <p>Design and control of robots at the micro scale, where small actuators and physical constraints shape what motion is possible.</p>
+          <div class="tags"><span>Robotics</span><span>Control</span></div>
+        </div>
+      </article>
+      <article>
+        <div class="yr">Earlier</div>
+        <div>
+          <h3>Gesture recognition</h3>
+          <p>Recognizing hand gestures from sensor or camera input so people can control machines with natural motion.</p>
+          <div class="tags"><span>Computer vision</span><span>Human-machine interaction</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>Areas of interest</h2>
+    <div class="interests">
+      <div><b>Spatial and geometric reasoning</b><span>Why models that see well still fail to plan in 3D.</span></div>
+      <div><b>Simulators as training environments</b><span>Rewards from physics, not from labels.</span></div>
+      <div><b>Robot manipulation</b><span>Taking a planned sequence from simulation to a robot arm.</span></div>
+      <div><b>Computational origami</b><span>Folding for deployable structures, packaging, and medical devices.</span></div>
+      <div><b>Embodied AI</b><span>Agents that sense and act in the physical world.</span></div>
+      <div><b>Human-machine interaction</b><span>Gesture and motion as an interface.</span></div>
+    </div>
+  </section>
+
+  <section class="contact">
+    <h2>Contact</h2>
+    <p>Email <code>lu@leanmcp.com</code></p>
+  </section>
+
+  <div class="legend"><span><i></i>mountain fold</span><span><i class="v"></i>valley fold</span></div>
+</div>
+</body></html>
