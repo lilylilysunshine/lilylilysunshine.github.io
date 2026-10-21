@@ -1,114 +1,229 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Lu Xian</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Familjen+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: one narrow reading column; a crease-pattern mark in the header; projects as a ruled list, not cards. */
+/* Layout: split hero (text left, live Miura-ori fold right); below, a two-column index: section label left, content right. */
 :root{
-  --paper:#f7f8f6; --ink:#1b211f; --muted:#5d6763; --rule:#d9dedb;
-  --mountain:#c2452d; --valley:#2c5f8a; --chip:#eceeec;
-  --display:"Fraunces",Georgia,serif; --body:"Public Sans",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --bg:#f6f7f8; --surface:#ffffff; --ink:#111418; --muted:#5b636d; --line:#dde1e6;
+  --mountain:#d8432c; --valley:#2357d8; --facet-a:#e9ecf0; --facet-b:#ffffff;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+  --body:"Familjen Grotesk",ui-sans-serif,system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
 }
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#141817;--ink:#e8ecea;--muted:#9aa5a0;--rule:#2b3230;--mountain:#e2735c;--valley:#7fb0d9;--chip:#1f2523;color-scheme:dark}}
-:root[data-theme="dark"]{--paper:#141817;--ink:#e8ecea;--muted:#9aa5a0;--rule:#2b3230;--mountain:#e2735c;--valley:#7fb0d9;--chip:#1f2523;color-scheme:dark}
-body{background:var(--paper);color:var(--ink);font:16px/1.6 var(--body)}
-.wrap{max-width:720px;margin:0 auto;padding-block:56px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:56px}
-header{display:grid;grid-template-columns:96px 1fr;gap:24px;align-items:center}
-header svg{width:96px;height:96px}
-h1{font:600 2.6rem/1.1 var(--display);margin:0;text-wrap:balance}
-.lede{margin:8px 0 0;color:var(--muted);max-width:56ch}
-h2{font:500 .75rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
-.proj{display:grid;gap:0}
-.proj article{display:grid;grid-template-columns:120px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--rule)}
-.yr{font:400 .8rem/1.6 var(--mono);color:var(--muted);padding-top:4px}
-h3{font:600 1.3rem/1.3 var(--display);margin:0 0 6px}
-.proj p{margin:0 0 10px;max-width:60ch}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1114;--surface:#171a1f;--ink:#eef1f4;--muted:#98a1ab;--line:#272c33;--mountain:#ff6a4f;--valley:#6c95ff;--facet-a:#1b1f25;--facet-b:#262b33;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1114;--surface:#171a1f;--ink:#eef1f4;--muted:#98a1ab;--line:#272c33;--mountain:#ff6a4f;--valley:#6c95ff;--facet-a:#1b1f25;--facet-b:#262b33;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--body)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--valley);outline-offset:3px}
+
+nav{display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;align-items:center;padding-block:28px;font:500 .8rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+nav .links{display:flex;gap:24px;flex-wrap:wrap}
+nav a{text-decoration:none}
+nav a:hover{color:var(--ink)}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:56px;align-items:center;padding-block:40px 88px}
+.eyebrow{font:500 .78rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mountain);margin:0 0 20px}
+h1{font:700 clamp(3rem,8vw,6rem)/.95 var(--display);letter-spacing:-.03em;margin:0 0 28px}
+.intro{display:grid;gap:14px;max-width:56ch}
+.intro p{margin:0;color:var(--muted)}
+.intro p:first-child{color:var(--ink);font-size:1.18rem;line-height:1.5}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font:500 .95rem var(--body);text-decoration:none;border:1px solid var(--line);background:var(--surface)}
+.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.btn:hover{transform:translateY(-1px)}
+.fold{position:relative;aspect-ratio:1/1;max-width:100%;border-radius:20px;overflow:hidden;background:var(--surface);border:1px solid var(--line);margin:0}
+.fold canvas{width:100%;height:100%;display:block}
+.fold figcaption{position:absolute;left:16px;bottom:14px;right:16px;display:flex;justify-content:space-between;gap:12px;font:400 .72rem var(--mono);color:var(--muted)}
+.key{display:flex;gap:14px}
+.key i{display:inline-block;width:16px;border-top:2px solid var(--mountain);vertical-align:middle;margin-right:5px}
+.key i.v{border-top:2px dashed var(--valley)}
+
+section.block{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;padding-block:56px;border-top:1px solid var(--line)}
+.label{font:500 .78rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:6px}
+
+.projects{display:grid;gap:20px}
+.project{display:grid;grid-template-columns:140px minmax(0,1fr);gap:28px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:16px}
+.project svg{width:140px;height:140px;border-radius:10px;background:var(--bg)}
+.meta{font:400 .78rem var(--mono);color:var(--muted);margin-bottom:6px}
+.project h3{font:700 1.5rem/1.2 var(--display);letter-spacing:-.01em;margin:0 0 10px}
+.project p{margin:0 0 14px;color:var(--muted)}
+.project p b{color:var(--ink);font-weight:600}
 .tags{display:flex;flex-wrap:wrap;gap:6px}
-.tags span{font:400 .75rem/1 var(--mono);background:var(--chip);padding:5px 8px;border-radius:3px;color:var(--muted)}
-.interests{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 32px}
-.interests div{border-left:2px dashed var(--valley);padding-left:14px}
-.interests b{display:block;font-weight:600}
-.interests span{color:var(--muted);font-size:.93rem}
-.contact p{margin:0;color:var(--muted)}
-.contact code{font-family:var(--mono);color:var(--ink);user-select:all}
-.legend{font:400 .75rem var(--mono);color:var(--muted);display:flex;gap:16px}
-.legend i{display:inline-block;width:18px;height:0;border-top:2px solid var(--mountain);vertical-align:middle;margin-right:6px}
-.legend i.v{border-top:2px dashed var(--valley)}
-@media (max-width:560px){header{grid-template-columns:1fr}.proj article{grid-template-columns:1fr;gap:4px}.interests{grid-template-columns:1fr}h1{font-size:2.1rem}}
+.tags span{font:400 .72rem var(--mono);border:1px solid var(--line);padding:4px 9px;border-radius:999px;color:var(--muted)}
+.status{color:var(--mountain)}
+
+.interests{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 32px}
+.interests h4{font:600 1.05rem/1.3 var(--body);margin:0 0 6px}
+.interests p{margin:0;color:var(--muted);font-size:.95rem}
+
+.timeline{display:grid}
+.row{display:grid;grid-template-columns:130px minmax(0,1fr) auto;gap:20px;padding-block:16px;border-bottom:1px solid var(--line);align-items:baseline}
+.row:last-child{border-bottom:0}
+.row .yr{font:400 .82rem var(--mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.row h4{font:600 1.08rem var(--body);margin:0}
+.row span{color:var(--muted)}
+.row .kind{font:400 .72rem var(--mono);text-transform:uppercase;letter-spacing:.08em}
+
+.contact h2{font:700 clamp(2rem,4.5vw,3.2rem)/1.05 var(--display);letter-spacing:-.02em;margin:0 0 20px;text-wrap:balance}
+.contact code{font:500 1rem var(--mono);user-select:all}
+footer{padding-block:32px 48px;color:var(--muted);font:400 .78rem var(--mono)}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:40px;padding-block:16px 64px}
+  section.block{grid-template-columns:1fr;gap:20px}
+  .interests{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .project{grid-template-columns:1fr}
+  .project svg{width:100%;height:160px}
+  .interests{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr;gap:2px}
+  nav .links{gap:14px}
+}
+@media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
 </style>
 
 </head><body>
 <div class="wrap">
-  <header>
-    <svg viewBox="0 0 100 100" aria-label="Waterbomb base crease pattern">
-      <rect x="2" y="2" width="96" height="96" fill="none" stroke="var(--ink)" stroke-width="2"/>
-      <path d="M2 2L98 98M98 2L2 98" stroke="var(--mountain)" stroke-width="2" fill="none"/>
-      <path d="M50 2V98M2 50H98" stroke="var(--valley)" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
-    </svg>
+  <nav>
+    <span>Lu Xian</span>
+    <div class="links"><a href="#work">Work</a><a href="#background">Background</a><a href="#contact">Contact</a></div>
+  </nav>
+
+  <header class="hero">
     <div>
+      <p class="eyebrow">AI researcher · Mountain View, CA</p>
       <h1>Lu Xian</h1>
-      <p class="lede">I am an AI researcher working on spatial reasoning and embodied intelligence. My question is how AI gets from understanding the physical world to acting in it: planning a sequence of steps, respecting exact geometry and physical constraints, and carrying the plan out on real hardware.</p>
-      <p class="lede">My current work uses origami as a test bed. Every fold has to be geometrically exact and done in the right order, which shows clearly where today's multimodal models break down. Before this I built microrobots (2021) and a gesture recognition system (2023), did research on AI systems at Stanford, and worked as a software engineer at Alibaba. I trained as an engineer at Hunan University (BEng) and the University of Glasgow (MSc).</p>
+      <div class="intro">
+        <p>I study how AI gets from understanding the physical world to acting in it: planning a sequence of steps, respecting exact geometry, and carrying the plan out on real hardware.</p>
+        <p>My current work uses origami as a test bed. Every fold has to be geometrically exact and done in the right order, which shows clearly where today's multimodal models break down.</p>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href="#work">See projects</a>
+        <a class="btn" href="https://www.linkedin.com/in/xian-lu/">LinkedIn ↗</a>
+      </div>
     </div>
+    <figure class="fold">
+      <canvas id="miura" aria-label="Animated Miura-ori fold pattern"></canvas>
+      <figcaption><span>Miura-ori, folding</span><span class="key"><span><i></i>mountain</span><span><i class="v"></i>valley</span></span></figcaption>
+    </figure>
   </header>
 
-  <section>
-    <h2>Projects</h2>
-    <div class="proj">
-      <article>
-        <div class="yr">2026 · in progress</div>
+  <section class="block" id="work">
+    <div class="label">Selected work</div>
+    <div class="projects">
+      <article class="project">
+        <svg viewBox="0 0 140 140" aria-hidden="true">
+          <rect x="20" y="20" width="100" height="100" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M20 20L120 120M120 20L20 120M70 20L20 70L70 120L120 70Z" stroke="var(--mountain)" stroke-width="2" fill="none"/>
+          <path d="M70 20V120M20 70H120" stroke="var(--valley)" stroke-width="2" stroke-dasharray="5 4" fill="none"/>
+        </svg>
         <div>
+          <div class="meta">2026 · <span class="status">Paper under review</span></div>
           <h3>Foldable origami: CP2Seq</h3>
-          <p>A paper-folding simulator and benchmark that tests whether multimodal models can plan in physical space. Given a crease pattern and a target folded shape, the model must produce the fold sequence. The simulator runs each fold and rejects illegal moves. Across 600 generated tasks, no tested model setup solved a task that needs 11 or more folds.</p>
-          <div class="tags"><span>Spatial reasoning</span><span>Benchmarks</span><span>Simulation</span><span>Paper under review</span></div>
+          <p>A paper-folding simulator and benchmark for spatial reasoning. Given a crease pattern and a target folded shape, a model has to produce the fold sequence. The simulator runs each fold and rejects illegal moves with clear feedback.</p>
+          <p><b>Finding:</b> across 600 generated tasks, no tested model setup solved a task that needs 11 or more folds. Most failures come from search, not from breaking rules.</p>
+          <div class="tags"><span>Spatial reasoning</span><span>Benchmark</span><span>Simulation</span><span>Multimodal models</span></div>
         </div>
       </article>
-      <article>
-        <div class="yr">2021</div>
+      <article class="project">
+        <svg viewBox="0 0 140 140" aria-hidden="true">
+          <circle cx="70" cy="70" r="46" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="3 5"/>
+          <rect x="52" y="58" width="36" height="24" rx="8" fill="none" stroke="var(--ink)" stroke-width="2"/>
+          <path d="M58 82l-8 14M70 82v16M82 82l8 14M58 58l-8-14M82 58l8-14" stroke="var(--valley)" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="113" cy="56" r="5" fill="var(--mountain)"/>
+        </svg>
         <div>
+          <div class="meta">2021</div>
           <h3>Microrobots</h3>
-          <p>Design and control of robots at the micro scale, where small actuators and physical constraints shape what motion is possible.</p>
-          <div class="tags"><span>Robotics</span><span>Control</span></div>
+          <p>Design and control of robots at the micro scale, where small actuators and physical limits decide which motions are possible.</p>
+          <div class="tags"><span>Robotics</span><span>Control</span><span>Hardware</span></div>
         </div>
       </article>
-      <article>
-        <div class="yr">2023</div>
+      <article class="project">
+        <svg viewBox="0 0 140 140" aria-hidden="true">
+          <path d="M50 110V66M62 110V40M74 110V36M86 110V44M98 110V62" stroke="var(--ink)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M50 66Q44 54 36 60" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <g fill="var(--valley)"><circle cx="62" cy="40" r="4"/><circle cx="74" cy="36" r="4"/><circle cx="86" cy="44" r="4"/><circle cx="98" cy="62" r="4"/><circle cx="36" cy="60" r="4"/></g>
+          <path d="M36 60L62 40L74 36L86 44L98 62" stroke="var(--mountain)" stroke-width="1.5" stroke-dasharray="3 3" fill="none"/>
+        </svg>
         <div>
+          <div class="meta">2023</div>
           <h3>Gesture recognition</h3>
-          <p>Recognizing hand gestures from sensor or camera input so people can control machines with natural motion.</p>
+          <p>Recognizing hand gestures from camera or sensor input, so people can control machines with natural motion.</p>
           <div class="tags"><span>Computer vision</span><span>Human-machine interaction</span></div>
         </div>
       </article>
     </div>
   </section>
 
-  <section>
-    <h2>Areas of interest</h2>
+  <section class="block">
+    <div class="label">Research interests</div>
     <div class="interests">
-      <div><b>Spatial and geometric reasoning</b><span>Why models that see well still fail to plan in 3D.</span></div>
-      <div><b>Simulators as training environments</b><span>Rewards from physics, not from labels.</span></div>
-      <div><b>Robot manipulation</b><span>Taking a planned sequence from simulation to a robot arm.</span></div>
-      <div><b>Computational origami</b><span>Folding for deployable structures, packaging, and medical devices.</span></div>
-      <div><b>Embodied AI</b><span>Agents that sense and act in the physical world.</span></div>
-      <div><b>Human-machine interaction</b><span>Gesture and motion as an interface.</span></div>
+      <div><h4>Spatial and geometric reasoning</h4><p>Why models that see well still fail to plan in 3D.</p></div>
+      <div><h4>Simulators as training environments</h4><p>Learning from rewards the physics provides, not from labels.</p></div>
+      <div><h4>Robot manipulation</h4><p>Taking a planned sequence from simulation to a robot arm.</p></div>
+      <div><h4>Computational origami</h4><p>Folding for deployable structures, packaging and medical devices.</p></div>
+      <div><h4>Embodied AI</h4><p>Agents that sense and act in the physical world.</p></div>
+      <div><h4>Human-machine interaction</h4><p>Gesture and motion as an interface.</p></div>
     </div>
   </section>
 
-  <section>
-    <h2>Education and experience</h2>
-    <div class="proj">
-      <article><div class="yr">2025</div><div><h3>Stanford University</h3><p>Research in AI systems and infrastructure, Palo Alto.</p></div></article>
-      <article><div class="yr">2020 – 2023</div><div><h3>Alibaba</h3><p>Software engineer on DingTalk, Hangzhou.</p></div></article>
-      <article><div class="yr">2019 – 2020</div><div><h3>University of Glasgow</h3><p>MSc, James Watt School of Engineering.</p></div></article>
-      <article><div class="yr">2014 – 2018</div><div><h3>Hunan University</h3><p>Bachelor of Engineering.</p></div></article>
+  <section class="block" id="background">
+    <div class="label">Background</div>
+    <div class="timeline">
+      <div class="row"><span class="yr">2025</span><div><h4>Stanford University</h4><span>Research in AI systems and infrastructure</span></div><span class="kind">Research</span></div>
+      <div class="row"><span class="yr">2020 – 2023</span><div><h4>Alibaba</h4><span>Software engineer, DingTalk</span></div><span class="kind">Industry</span></div>
+      <div class="row"><span class="yr">2019 – 2020</span><div><h4>University of Glasgow</h4><span>MSc, James Watt School of Engineering</span></div><span class="kind">Education</span></div>
+      <div class="row"><span class="yr">2014 – 2018</span><div><h4>Hunan University</h4><span>Bachelor of Engineering</span></div><span class="kind">Education</span></div>
     </div>
   </section>
 
-  <section class="contact">
-    <h2>Contact</h2>
-    <p>Email <code>lu@leanmcp.com</code> · <a href="https://www.linkedin.com/in/xian-lu/" style="color:var(--valley)">LinkedIn</a></p>
+  <section class="block contact" id="contact">
+    <div class="label">Contact</div>
+    <div>
+      <h2>Working on spatial AI or robotics? Let's talk.</h2>
+      <div class="cta" style="margin-top:0">
+        <span class="btn"><code>lu@leanmcp.com</code></span>
+        <a class="btn" href="https://www.linkedin.com/in/xian-lu/">LinkedIn ↗</a>
+      </div>
+    </div>
   </section>
 
-  <div class="legend"><span><i></i>mountain fold</span><span><i class="v"></i>valley fold</span></div>
+  <footer>© 2026 Lu Xian</footer>
 </div>
+
+<script>
+(function(){
+  const c=document.getElementById('miura'), ctx=c.getContext('2d');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  function size(){const r=c.getBoundingClientRect(),d=devicePixelRatio||1;c.width=r.width*d;c.height=r.height*d;ctx.setTransform(d,0,0,d,0,0);return r}
+  let R=size(); addEventListener('resize',()=>{R=size()});
+  function draw(t){
+    const W=R.width,H=R.height,cols=8,rows=7;
+    const fold=reduce?0.45:0.5+0.5*Math.sin((t||0)/1600); // 0 = flat, 1 = mostly folded
+    const cw=(W*0.78/cols)*(1-0.4*fold), rh=H*0.72/rows, shift=cw*(0.25+0.6*fold);
+    const ox=(W-cw*cols-shift)/2, oy=(H-rh*rows)/2-12;
+    const V=(i,j)=>[ox+i*cw+((j%2)?shift:0), oy+j*rh]; // zigzag columns
+    ctx.clearRect(0,0,W,H);
+    const A=css('--facet-a'),B=css('--facet-b'),M=css('--mountain'),Vc=css('--valley'),ink=css('--ink');
+    for(let j=0;j<rows;j++)for(let i=0;i<cols;i++){
+      const p=[V(i,j),V(i+1,j),V(i+1,j+1),V(i,j+1)];
+      ctx.beginPath();p.forEach((q,k)=>k?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.closePath();
+      ctx.globalAlpha=1;ctx.fillStyle=((i+j)%2)?A:B;ctx.fill();
+      ctx.globalAlpha=0.04+0.16*fold*((i+j)%2);ctx.fillStyle=ink;ctx.fill();
+    }
+    ctx.globalAlpha=1;ctx.lineWidth=1.6;
+    for(let j=0;j<=rows;j++){ctx.strokeStyle=(j%2)?M:Vc;ctx.setLineDash((j%2)?[]:[5,4]);ctx.beginPath();for(let i=0;i<=cols;i++){const q=V(i,j);i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])}ctx.stroke()}
+    for(let i=0;i<=cols;i++){ctx.strokeStyle=(i%2)?Vc:M;ctx.setLineDash((i%2)?[5,4]:[]);ctx.beginPath();for(let j=0;j<=rows;j++){const q=V(i,j);j?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1])}ctx.stroke()}
+    ctx.setLineDash([]);
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+</script>
 </body></html>
